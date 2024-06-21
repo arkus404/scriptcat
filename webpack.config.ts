@@ -21,11 +21,11 @@ const config: Configuration = {
   entry: {
     options: `${src}/pages/options/main.tsx`,
     install: `${src}/pages/install/main.tsx`,
-    background: `${src}/background.ts`,
     sandbox: `${src}/sandbox.ts`,
     popup: `${src}/pages/popup/main.tsx`,
     confirm: `${src}/pages/confirm/main.tsx`,
     import: `${src}/pages/import/main.tsx`,
+    service_worker: `${src}/service_worker.ts`,
   },
   output: {
     path: `${dist}/ext/src`,
@@ -72,17 +72,6 @@ const config: Configuration = {
         removeComments: true,
       },
       chunks: ["popup"],
-    }),
-    new HtmlWebpackPlugin({
-      filename: `${dist}/ext/src/background.html`,
-      template: `${template}/background.html`,
-      inject: "head",
-      title: "ScriptCat",
-      minify: {
-        removeComments: true,
-      },
-      chunks: ["background"],
-      scriptLoading: "blocking",
     }),
     new HtmlWebpackPlugin({
       filename: `${dist}/ext/src/confirm.html`,

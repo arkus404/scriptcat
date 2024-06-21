@@ -12,7 +12,7 @@ module.exports = {
     "\\.[jt]s$": "babel-jest",
     "\\.m[jt]s$": "babel-jest",
   },
-  transformIgnorePatterns: ["node_modules/(?!(uuid|dexi|yaml))"],
+  transformIgnorePatterns: ["node_modules/(?!(uuid|dexie|yaml))"],
   setupFiles: ["./pkg/chrome-extension-mock/index.ts"],
   moduleDirectories: ["node_modules", "src"],
   watch: false,

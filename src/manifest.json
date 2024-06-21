@@ -1,7 +1,7 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "__MSG_scriptcat__",
-  "version": "0.16.3",
+  "version": "0.17.0.1010",
   "author": "CodFrm",
   "description": "__MSG_scriptcat_description__",
   "options_ui": {
@@ -12,16 +12,20 @@
   "icons": {
     "128": "assets/logo.png"
   },
-  "browser_action": {
+  "action": {
     "default_popup": "src/popup.html"
   },
   "background": {
-    "page": "src/background.html"
+    "service_worker": "src/service_worker.js"
   },
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "js": ["src/content.js"],
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "src/content.js"
+      ],
       "run_at": "document_start",
       "all_frames": true
     }
@@ -30,16 +34,21 @@
     "tabs",
     "cookies",
     "storage",
+    "activeTab",
+    "scripting",
+    "offscreen",
     "downloads",
-    "webRequest",
-    "background",
-    "<all_urls>",
     "contextMenus",
     "notifications",
     "clipboardWrite",
-    "webRequestBlocking"
+    "declarativeNetRequest"
+  ],
+  "host_permissions": [
+    "<all_urls>"
   ],
   "sandbox": {
-    "pages": ["src/sandbox.html"]
+    "pages": [
+      "src/sandbox.html"
+    ]
   }
 }
