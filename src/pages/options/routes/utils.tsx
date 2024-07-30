@@ -1,9 +1,9 @@
 /* eslint-disable import/prefer-default-export */
 import React from "react";
 import IoC from "@App/app/ioc";
-import { Script, ScriptDAO } from "@App/app/repo/scripts";
+import { Metadata, Script, ScriptDAO } from "@App/app/repo/scripts";
 import ValueManager from "@App/app/service/value/manager";
-import { Button, Space, Tooltip } from "@arco-design/web-react";
+import { Avatar, Button, Space, Tooltip } from "@arco-design/web-react";
 import {
   IconBug,
   IconCode,
@@ -189,4 +189,35 @@ export function getValues(script: Script) {
       });
       return newValues;
     });
+}
+
+export type ScriptIconsProps = {
+  script: { name: string; metadata: Metadata };
+  size?: number;
+  style?: React.CSSProperties;
+};
+
+export function ScriptIcons({ script, size = 32, style }: ScriptIconsProps) {
+  style = style || {};
+  style.display = style.display || "inline-block";
+  style.marginRight = style.marginRight || "8px";
+  let icon = "";
+  if (script.metadata.icon) {
+    [icon] = script.metadata.icon;
+  } else if (script.metadata.iconurl) {
+    [icon] = script.metadata.iconurl;
+  } else if (script.metadata.icon64) {
+    [icon] = script.metadata.icon64;
+  } else if (script.metadata.icon64url) {
+    [icon] = script.metadata.icon64url;
+  }
+  if (icon) {
+    return (
+      <Avatar size={size || 32} shape="square" style={style}>
+        <img src={icon} alt={script?.name} />
+      </Avatar>
+    );
+  }
+  // eslint-disable-next-line react/jsx-no-useless-fragment
+  return <></>;
 }

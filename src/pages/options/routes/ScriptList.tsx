@@ -75,7 +75,12 @@ import { useTranslation } from "react-i18next";
 import { nextTime, semTime } from "@App/pkg/utils/utils";
 import { i18nName } from "@App/locales/locales";
 import { SystemConfig } from "@App/pkg/config/config";
-import { getValues, ListHomeRender, scriptListSort } from "./utils";
+import {
+  getValues,
+  ListHomeRender,
+  ScriptIcons,
+  scriptListSort,
+} from "./utils";
 
 type ListType = Script & { loading?: boolean };
 
@@ -163,15 +168,8 @@ function ScriptList() {
             disabled={item.loading}
             onChange={(checked) => {
               setScriptList((list) => {
-                return list.map((script) => {
-                  if (script.id === item.id) {
-                    script.loading = true;
-                  }
-                  return script;
-                });
-              });
-              setScriptList((list) => {
                 const index = list.findIndex((script) => script.id === item.id);
+                list[index].loading = true;
                 let p: Promise<any>;
                 if (checked) {
                   p = scriptCtrl.enable(item.id).then(() => {
@@ -257,8 +255,10 @@ function ScriptList() {
                   overflow: "hidden",
                   textOverflow: "ellipsis",
                   whiteSpace: "nowrap",
+                  lineHeight: "20px",
                 }}
               >
+                <ScriptIcons script={item} size={20} />
                 {i18nName(item)}
               </Text>
             </Link>
